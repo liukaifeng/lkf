@@ -12,10 +12,11 @@
  * Description:
  ******************************************************
  */
-package com.lkf.example.reset.config;
+package com.lkf.druid.autoconfigure;
 
-import javax.sql.DataSource;
-
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.support.http.StatViewServlet;
+import com.alibaba.druid.support.http.WebStatFilter;
 import org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -24,12 +25,10 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.support.http.StatViewServlet;
-import com.alibaba.druid.support.http.WebStatFilter;
+import javax.sql.DataSource;
 
 /**
- * @ClassName: DruidConfig
+ * @ClassName: DruidAutoConfiguration
  * @Description: 数据库连接池自动配置
  * @author administrator
  * @date 2017年3月7日 下午5:26:06
@@ -37,7 +36,7 @@ import com.alibaba.druid.support.http.WebStatFilter;
  */
 @Configuration
 @AutoConfigureBefore(MybatisAutoConfiguration.class)
-public class DruidAutoConfig
+public class DruidAutoConfiguration
 {
     /**
     * @Title: druiDataSource
