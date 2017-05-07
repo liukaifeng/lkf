@@ -1,6 +1,8 @@
 package com.lkf.example.rest;
 
 
+import com.lkf.common.page.PageOut;
+import com.lkf.common.response.ResponseResult;
 import com.lkf.example.api.service.UserService;
 import com.lkf.example.model.entity.UserPO;
 import io.swagger.annotations.ApiImplicitParam;
@@ -38,7 +40,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/alluser", method = RequestMethod.GET)
-	public List<UserPO> findAllUser() {
+	public ResponseResult<PageOut> findAllUser() {
 		return userService.findAllUser();
 	}
 

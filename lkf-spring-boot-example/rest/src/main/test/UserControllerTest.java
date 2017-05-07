@@ -1,3 +1,4 @@
+import com.alibaba.fastjson.JSONObject;
 import com.lkf.example.api.service.UserService;
 import com.lkf.example.rest.App;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class UserControllerTest {
 
 	@Test
 	public void getAllUser(){
-		System.err.println(userService.findAllUser());
+		System.err.println(JSONObject.toJSONString(userService.findAllUser()));
 
 	}
 }

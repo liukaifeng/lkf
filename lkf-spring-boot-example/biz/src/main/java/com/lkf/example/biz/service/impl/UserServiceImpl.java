@@ -1,6 +1,9 @@
 package com.lkf.example.biz.service.impl;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.lkf.common.page.PageOut;
+import com.lkf.common.response.ResponseResult;
 import com.lkf.example.api.service.UserService;
 import com.lkf.example.biz.dao.UserDao;
 import com.lkf.example.model.entity.UserPO;
@@ -30,10 +33,10 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public List<UserPO> findAllUser()
+    public ResponseResult<PageOut> findAllUser()
     {
-        PageHelper.startPage(1,2);
-        return userMapper.findAllUser();
-        
+	    Page<List<UserPO>> page=PageHelper.startPage(1,2);
+       List<UserPO> list= userMapper.findAllUser();
+        return ResponseResult.success(PageOut.result(page.getPages(),page.getResult()));
     }
 }

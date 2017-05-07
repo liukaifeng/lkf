@@ -1,6 +1,8 @@
 package com.lkf.example.api.service;
 
 
+import com.lkf.common.page.PageOut;
+import com.lkf.common.response.ResponseResult;
 import com.lkf.example.model.entity.UserPO;
 
 import java.util.List;
@@ -24,5 +26,5 @@ public interface UserService
     */
     void addUser(UserPO user);
     
-    List<UserPO> findAllUser();
+    ResponseResult<PageOut> findAllUser();
 }

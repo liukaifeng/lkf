@@ -19,6 +19,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="api" />
     <orderEntry type="module" module-name="model" />
+    <orderEntry type="module" module-name="lkf-spring-boot-common" />
     <orderEntry type="module" module-name="biz" />
     <orderEntry type="module" module-name="lkf-spring-boot-starter-pagehelper" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.2.RELEASE" level="project" />
