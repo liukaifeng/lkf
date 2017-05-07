@@ -24,7 +24,7 @@ public interface UserService
     * @param user
     * @throws
     */
-    void addUser(UserPO user);
+    void addUser(UserPO user) throws Exception;
     
     ResponseResult<PageOut> findAllUser();
 }

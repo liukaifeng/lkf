@@ -15,7 +15,6 @@
         <project.build.java>1.8</project.build.java>
         <springfox.swagger2.version>2.6.1</springfox.swagger2.version>
         <fastjson.version>1.2.31</fastjson.version>
-        <mybatis.spring.boot.version>1.2.1</mybatis.spring.boot.version>
         <commons.lang3.version>3.5</commons.lang3.version>
         <juint.version>4.12</juint.version>
 
@@ -27,25 +26,7 @@
         <version>1.5.2.RELEASE</version>
     </parent>
 
-    <dependencyManagement>
-        <dependencies>
-            <!--<dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring.cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>-->
-            <!--mysql 驱动-->
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.spring.boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
     <dependencies>
         <!-- 核心模块，包括自动配置支持、日志和YAML -->
         <dependency>
@@ -122,7 +103,7 @@
     <modules>
         <module>../lkf-spring-boot</module>
         <module>../lkf-spring-boot-starter</module>
-        <module>../lkf-spring-boot-sample</module>
+        <module>../lkf-spring-boot-common</module>
     </modules>
     <build>
         <plugins>

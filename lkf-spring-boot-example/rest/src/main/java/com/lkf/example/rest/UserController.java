@@ -25,7 +25,7 @@ public class UserController {
 	@ApiOperation(value = "添加用户信息", notes = "添加用户信息")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User") })
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addUser(UserPO user) {
+	public String addUser(UserPO user) throws Exception {
 		if (user != null) {
 			userService.addUser(user);
 		}

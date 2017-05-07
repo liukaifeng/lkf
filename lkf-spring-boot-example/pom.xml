@@ -11,7 +11,9 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>lkf-spring-boot-example</artifactId>
     <packaging>pom</packaging>
-
+    <properties>
+        <mybatis-spring-boot.version>1.3.0</mybatis-spring-boot.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.lkf</groupId>
@@ -19,21 +21,20 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.0.28</version>
+            <groupId>com.lkf</groupId>
+            <artifactId>lkf-spring-boot-starter-druid</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
-
         <!-- mybatis与spring-boot集成 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.3.0</version>
+            <version>${mybatis-spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
-            <version>1.3.0</version>
+            <version>${mybatis-spring-boot.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>

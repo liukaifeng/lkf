@@ -3,14 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>lkf-spring-boot</artifactId>
+        <artifactId>lkf-spring-boot-parent</artifactId>
         <groupId>com.lkf</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../lkf-spring-boot/pom.xml</relativePath>
+        <relativePath>../lkf-spring-boot-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>lkf-spring-boot-starter</artifactId>
-
+    <packaging>pom</packaging>
+    <modules>
+        <module>lkf-spring-boot-starter-pagehelper</module>
+        <module>lkf-spring-boot-starter-druid</module>
+    </modules>
 
 </project>

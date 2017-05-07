@@ -6,10 +6,12 @@ import com.lkf.example.model.entity.UserPO;
 import java.util.List;
 
 
-public interface UserDao {
+public interface UserMapper {
 
     void addUser(UserPO user);
     
-    List<UserPO> findAllUser();
+
+
+    List<UserPO> getAllUser();
 
 }

@@ -1,0 +1,5 @@
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.lkf.druid.autoconfigure.DruidAutoConfiguration,\
+  com.lkf.druid.autoconfigure.TransactionAutoConfiguration
+
