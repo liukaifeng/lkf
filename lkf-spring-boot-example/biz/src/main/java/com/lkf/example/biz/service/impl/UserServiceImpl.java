@@ -1,9 +1,9 @@
 package com.lkf.example.biz.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import com.lkf.example.api.model.UserPO;
 import com.lkf.example.api.service.UserService;
 import com.lkf.example.biz.dao.UserDao;
+import com.lkf.example.model.entity.UserPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

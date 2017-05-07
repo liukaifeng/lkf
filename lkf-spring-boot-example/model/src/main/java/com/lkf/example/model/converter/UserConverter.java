@@ -1,4 +1,4 @@
-package com.lkf.example.biz.entity.converter;
+package com.lkf.example.model.converter;
 
 /**
  * Created by kaifeng on 2017/5/7.

@@ -1,4 +1,4 @@
-package com.lkf.example.biz.entity;
+package com.lkf.example.model.dto;
 
 /**
  * All rights Reserved, Designed By www.slyun.com

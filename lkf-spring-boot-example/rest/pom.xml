@@ -14,11 +14,36 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.lkf</groupId>
-            <artifactId>lkf-spring-boot-example-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>${parent.artifactId}-api</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${parent.groupId}</groupId>
+            <artifactId>${parent.artifactId}-biz</artifactId>
+            <version>${parent.version}</version>
         </dependency>
     </dependencies>
 
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.lkf.example.rest.App</mainClass>
+                    <outputDirectory>
+                        ${project.build.directory}/${project.parent.name}
+                    </outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -1,7 +1,7 @@
 package com.lkf.example.biz.dao;
 
 
-import com.lkf.example.api.model.UserPO;
+import com.lkf.example.model.entity.UserPO;
 
 import java.util.List;
 

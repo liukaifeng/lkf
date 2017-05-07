@@ -1,7 +1,7 @@
 package com.lkf.example.api.service;
 
-import com.lkf.example.api.model.UserPO;
-import org.springframework.stereotype.Component;
+
+import com.lkf.example.model.entity.UserPO;
 
 import java.util.List;
 

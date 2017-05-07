@@ -1,4 +1,4 @@
-package com.lkf.example.api.model;
+package com.lkf.example.model.entity;
 
 import org.apache.ibatis.type.Alias;
 
