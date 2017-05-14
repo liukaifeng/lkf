@@ -42,8 +42,15 @@
             <scope>runtime</scope>
         </dependency>
 
-
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lkf</groupId>
+            <artifactId>lkf-spring-boot-starter-redis</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <modules>
         <module>api</module>

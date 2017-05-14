@@ -1,10 +1,12 @@
 package com.lkf.example.rest;
 
 
-import com.lkf.common.page.PageOut;
-import com.lkf.common.response.ResponseResult;
+import com.lkf.common.model.page.PageOut;
+import com.lkf.common.model.response.ResponseResult;
 import com.lkf.example.api.service.UserService;
+import com.lkf.example.model.entity.User;
 import com.lkf.example.model.entity.UserPO;
+import com.lkf.redis.RedisUtilService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -14,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
 	@Autowired
 	private UserService userService;
+
 
 	@ApiOperation(value = "添加用户信息", notes = "添加用户信息")
 	@ApiImplicitParams({ @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User") })
@@ -43,6 +44,13 @@ public class UserController {
 	public ResponseResult<PageOut> findAllUser() {
 		return userService.findAllUser();
 	}
+
+	@RequestMapping(value = "/mongodb", method = RequestMethod.GET)
+	public void addUserMongodb() throws Exception {
+		User user=new User(1L,"",5);
+		userService.addUserMongodb(user);
+	}
+
 
 
 }

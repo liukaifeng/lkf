@@ -1,4 +1,4 @@
-package com.lkf.common.constant;
+package com.lkf.common.model.constant;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONType;

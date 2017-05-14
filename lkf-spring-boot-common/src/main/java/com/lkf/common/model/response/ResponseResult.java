@@ -1,6 +1,6 @@
-package com.lkf.common.response;
+package com.lkf.common.model.response;
 
-import com.lkf.common.constant.ResponseResultConstant;
+import com.lkf.common.model.constant.ResponseResultConstant;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;

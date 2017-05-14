@@ -1,11 +1,10 @@
 package com.lkf.example.api.service;
 
 
-import com.lkf.common.page.PageOut;
-import com.lkf.common.response.ResponseResult;
+import com.lkf.common.model.page.PageOut;
+import com.lkf.common.model.response.ResponseResult;
+import com.lkf.example.model.entity.User;
 import com.lkf.example.model.entity.UserPO;
-
-import java.util.List;
 
 /**
  * @ClassName: UserService
@@ -27,4 +26,6 @@ public interface UserService
     void addUser(UserPO user) throws Exception;
     
     ResponseResult<PageOut> findAllUser();
+
+    void addUserMongodb(User user) throws Exception;
 }

@@ -23,6 +23,7 @@
             <artifactId>${parent.artifactId}-biz</artifactId>
             <version>${parent.version}</version>
         </dependency>
+
     </dependencies>
 
     <build>

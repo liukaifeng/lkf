@@ -28,7 +28,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @date 2017年3月7日 下午5:09:39
  */
 @SpringBootApplication
-@ComponentScan(basePackages = "com.lkf.example")
+@ComponentScan(basePackages = {"com.lkf.example","com.lkf.**"})
 @MapperScan("com.lkf.example.**.dao")
 public class App
 {

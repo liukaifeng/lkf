@@ -1,4 +1,4 @@
-package com.lkf.common.page;
+package com.lkf.common.model.page;
 
 import java.io.Serializable;
 

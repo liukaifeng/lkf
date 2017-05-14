@@ -14,6 +14,8 @@
     <modules>
         <module>lkf-spring-boot-starter-pagehelper</module>
         <module>lkf-spring-boot-starter-druid</module>
+        <module>lkf-spring-boot-starter-mongodb</module>
+        <module>lkf-spring-boot-starter-redis</module>
     </modules>
 
 </project>
