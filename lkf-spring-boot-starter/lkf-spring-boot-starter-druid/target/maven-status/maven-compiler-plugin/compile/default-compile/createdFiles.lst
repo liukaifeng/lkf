@@ -1,0 +1,3 @@
+com\lkf\druid\autoconfigure\DruidAutoConfiguration.class
+META-INF\spring-configuration-metadata.json
+com\lkf\druid\autoconfigure\TransactionAutoConfiguration.class

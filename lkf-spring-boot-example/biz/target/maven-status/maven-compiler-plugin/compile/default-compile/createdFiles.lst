@@ -1,0 +1,3 @@
+com\lkf\example\biz\dao\UserMapper.class
+com\lkf\example\biz\dao\UserRepository.class
+com\lkf\example\biz\service\impl\UserServiceImpl.class

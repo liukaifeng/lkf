@@ -1,0 +1,72 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper",
+      "type": "com.lkf.pagehelper.autoconfigure.PageHelperProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.auto-dialect",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.auto-runtime-dialect",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.close-conn",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.dialect",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.helper-dialect",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.offset-as-page-num",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.page-size-zero",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.params",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.properties",
+      "type": "java.util.Properties"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.reasonable",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.row-bounds-with-count",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lkf.pagehelper.autoconfigure.PageHelperProperties",
+      "name": "pagehelper.support-methods-arguments",
+      "type": "java.lang.String"
+    }
+  ]
+}

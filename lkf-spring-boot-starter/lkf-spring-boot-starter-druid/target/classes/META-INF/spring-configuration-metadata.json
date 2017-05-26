@@ -1,0 +1,12 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.lkf.druid.autoconfigure.DruidAutoConfiguration",
+      "name": "spring.datasource",
+      "sourceMethod": "druiDataSource()",
+      "type": "javax.sql.DataSource"
+    }
+  ],
+  "properties": []
+}

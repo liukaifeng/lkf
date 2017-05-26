@@ -6,6 +6,18 @@
     <groupId>${parent.groupId}.rest</groupId>
     <artifactId>${parent.artifactId}-rest</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.lkf.api</groupId>
+            <artifactId>lkf-spring-boot-activiti-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lkf.biz</groupId>
+            <artifactId>lkf-spring-boot-activiti-biz</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     <parent>
         <artifactId>lkf-spring-boot-activiti</artifactId>
@@ -13,5 +25,25 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.lkf.activiti.rest.AcivitiApplication</mainClass>
+                    <outputDirectory>
+                        ${project.build.directory}/${project.parent.name}
+                    </outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

@@ -1,0 +1,4 @@
+com\lkf\example\model\converter\UserConverter.class
+com\lkf\example\model\entity\UserPO.class
+com\lkf\example\model\dto\UserDTO.class
+com\lkf\example\model\entity\User.class

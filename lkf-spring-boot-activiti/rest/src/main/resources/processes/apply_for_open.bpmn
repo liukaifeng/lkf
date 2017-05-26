@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://activiti.org/bpmn20" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1495020647067" name="" targetNamespace="http://activiti.org/bpmn20" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="apply_for_open" isClosed="true" isExecutable="true" name="商龙云工作流程演示样例" processType="None">
+    <documentation id="doc"><![CDATA[abc]]></documentation>
+    <startEvent activiti:initiator="applyUserId" id="task_start"/>
+    <sequenceFlow id="flow1" sourceRef="task_start" targetRef="task_submit_apply"/>
+    <userTask activiti:assignee="${applyUserId}" activiti:exclusive="true" id="task_submit_apply" name="提交申请"/>
+    <sequenceFlow id="flow2" sourceRef="task_submit_apply" targetRef="task_business_approval"/>
+    <userTask activiti:assignee="lisi" activiti:exclusive="true" id="task_business_approval" name="商务审批"/>
+    <userTask activiti:assignee="wangwu" activiti:exclusive="true" id="task_financing_approval" name="财务审批"/>
+    <sequenceFlow id="flow4" sourceRef="task_financing_approval" targetRef="task_end"/>
+    <endEvent id="task_end"/>
+    <userTask activiti:assignee="zhaoliu" activiti:exclusive="true" id="task_business_leader_approval" name="商务领导审批"/>
+    <exclusiveGateway gatewayDirection="Unspecified" id="exclusive_gateway" name="互斥网管"/>
+    <sequenceFlow id="_4" sourceRef="task_business_approval" targetRef="exclusive_gateway"/>
+    <sequenceFlow id="_5" name="需要领导审批" sourceRef="exclusive_gateway" targetRef="task_business_leader_approval">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${input==1}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_7" name="不需要领导审批" sourceRef="exclusive_gateway" targetRef="task_financing_approval">
+      <extensionElements>
+        <activiti:executionListener event="start"/>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${input==0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_6" name="商务领导审批通过" sourceRef="task_business_leader_approval" targetRef="task_financing_approval"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="apply_for_open">
+      <bpmndi:BPMNShape bpmnElement="task_end" id="Shape-task_end">
+        <dc:Bounds height="32.0" width="32.0" x="547.0" y="200.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task_financing_approval" id="Shape-task_financing_approval">
+        <dc:Bounds height="55.0" width="85.0" x="402.0" y="188.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task_business_approval" id="Shape-task_business_approval">
+        <dc:Bounds height="55.0" width="85.0" x="257.0" y="188.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task_submit_apply" id="Shape-task_submit_apply">
+        <dc:Bounds height="55.0" width="85.0" x="112.0" y="188.5"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task_start" id="Shape-task_start">
+        <dc:Bounds height="32.0" width="32.0" x="20.0" y="200.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="task_business_leader_approval" id="Shape-task_business_leader_approval">
+        <dc:Bounds height="55.0" width="85.0" x="265.0" y="10.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusive_gateway" id="Shape-exclusive_gateway" isMarkerVisible="false">
+        <dc:Bounds height="32.0" width="32.0" x="310.0" y="105.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1" sourceElement="task_start" targetElement="task_submit_apply">
+        <di:waypoint x="52.0" y="216.0"/>
+        <di:waypoint x="112.0" y="216.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2" sourceElement="task_submit_apply" targetElement="task_business_approval">
+        <di:waypoint x="197.0" y="216.0"/>
+        <di:waypoint x="257.0" y="216.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4" id="BPMNEdge__4" sourceElement="task_business_approval" targetElement="exclusive_gateway">
+        <di:waypoint x="326.0" y="189.0"/>
+        <di:waypoint x="326.0" y="137.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4" sourceElement="task_financing_approval" targetElement="task_end">
+        <di:waypoint x="487.0" y="216.0"/>
+        <di:waypoint x="547.0" y="216.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5" id="BPMNEdge__5" sourceElement="exclusive_gateway" targetElement="task_business_leader_approval">
+        <di:waypoint x="326.0" y="105.0"/>
+        <di:waypoint x="326.0" y="65.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6" id="BPMNEdge__6" sourceElement="task_business_leader_approval" targetElement="task_financing_approval">
+        <di:waypoint x="350.0" y="37.5"/>
+        <di:waypoint x="445.0" y="90.0"/>
+        <di:waypoint x="445.0" y="189.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7" sourceElement="exclusive_gateway" targetElement="task_financing_approval">
+        <di:waypoint x="342.0" y="121.0"/>
+        <di:waypoint x="402.0" y="216.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

@@ -1,0 +1,3 @@
+com\lkf\pagehelper\autoconfigure\PageHelperProperties.class
+com\lkf\pagehelper\autoconfigure\PageHelperAutoConfiguration.class
+META-INF\spring-configuration-metadata.json
