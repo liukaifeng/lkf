@@ -6,13 +6,22 @@
     <groupId>com.lkf</groupId>
     <artifactId>lkf-spring-boot-activiti</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <artifactId>lkf-spring-boot-parent</artifactId>
+        <groupId>com.lkf</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../lkf-spring-boot-parent/pom.xml</relativePath>
+    </parent>
+
     <modules>
         <module>api</module>
         <module>biz</module>
         <module>rest</module>
         <module>model</module>
     </modules>
-    <packaging>pom</packaging>
+
 
     <properties>
         <activiti.version>5.22.0</activiti.version>

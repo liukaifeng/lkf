@@ -1,4 +1,5 @@
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Maps;
 import com.lkf.activiti.listener.JumpCmd;
 import com.lkf.activiti.rest.AcivitiApplication;
 import org.activiti.engine.*;
@@ -7,6 +8,7 @@ import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.Execution;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.junit.Test;
@@ -18,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @package: java.com.tcsl.slyun.bpmn.test
@@ -48,10 +51,11 @@ public class TaskTest {
      */
     @Test
     public void deploymentProcessDefinition_inputStream() throws FileNotFoundException {
-        InputStream inputStreamBpmn = this.getClass().getClassLoader().getResourceAsStream("processes/leave.bpmn");
+        InputStream inputStreamBpmn = this.getClass().getClassLoader().getResourceAsStream("processes/slyun_workflow_default.bpmn");
+
         Deployment deployment = repositoryService.createDeployment()
-                .addInputStream("leave.bpmn", inputStreamBpmn)
-                .name("请假申请-两级审批").deploy();
+                .addInputStream("slyun_workflow_default.bpmn", inputStreamBpmn)
+                .name("商龙云默认工作流").deploy();
 
         System.out.println("部署：" + JSONObject.toJSONString(deployment));
 
@@ -68,12 +72,32 @@ public class TaskTest {
         }
     }
 
+    @Test
+    public void getRuntimeProcess() {
+      List<Execution> executionList=  runtimeService.createExecutionQuery().orderByProcessDefinitionId().desc().list();
+      if (executionList!=null&&executionList.size()>0)
+      {
+          for (Execution execution: executionList) {
+              System.err.println("getProcessInstanceId=="+execution.getProcessInstanceId());
+              System.err.println("getDescription=="+execution.getDescription());
+              System.err.println("getId=="+execution.getId());
+              System.err.println("getName=="+execution.getName());
+
+          }
+      }
+      else{
+          System.err.println("没有正在执行的流程");
+      }
+
+    }
     /**
      * 启动流程实例
      */
     @Test
     public void startProcessInstance() {
-        String processDefinitionKey = "work_flow_leave:4:80004";
+        String processDefinitionKey = "slyun_workflow_default:4:385008";
+        identityService.setAuthenticatedUserId("100001");
+        identityService.setUserInfo("100001","username","liukaifeng");
         ProcessInstance pi = runtimeService.startProcessInstanceById(processDefinitionKey);
         System.err.println("=================ProcessInstance=======================");
         System.err.println("getBusinessKey:" +  pi.getBusinessKey());
@@ -93,10 +117,13 @@ public class TaskTest {
         System.err.println("===================ProcessInstance=====================");
 
     }
+    @Test
+    public void getProcessByUser(){
+    }
 
     @Test
     public void findTaskList(){
-        List<Task> taskList=taskService.createTaskQuery().processDefinitionId("work_flow_leave:4:80004").orderByTaskCreateTime().desc().list();
+        List<Task> taskList=taskService.createTaskQuery().processDefinitionId("slyun_workflow_default:2:367508").orderByTaskCreateTime().desc().list();
         if (taskList != null&&taskList.size()>0) {
             for (Task task:taskList)
             {
@@ -115,7 +142,12 @@ public class TaskTest {
 
     @Test
     public void completeTask(){
-        taskService.complete("82504");
+        Map<String,Object> map= Maps.newHashMap();
+        map.put("business_leader_flag",0);
+        String taskId="387505";
+        taskService.setAssignee(taskId,"1000900");
+        taskService.addComment(taskId,null,"当前是商务审批，下一步流转到财务审批");
+        taskService.complete(taskId,map);
         System.err.println("任务完成");
     }
     @Test
