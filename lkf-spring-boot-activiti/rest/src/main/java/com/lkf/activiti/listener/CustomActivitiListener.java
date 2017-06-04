@@ -1,6 +1,9 @@
 package com.lkf.activiti.listener;
 
 import com.alibaba.fastjson.JSONObject;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
 import org.activiti.engine.delegate.DelegateExecution;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.ExecutionListener;
@@ -9,6 +12,7 @@ import org.activiti.engine.delegate.event.ActivitiEntityEvent;
 import org.activiti.engine.delegate.event.ActivitiEvent;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
+import org.activiti.engine.runtime.Execution;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -17,20 +21,18 @@ import java.io.Serializable;
  * Created by Administrator on 2017/5/29 0029.
  */
 @Service("customActivitiListener")
-public class CustomActivitiListener implements Serializable,ActivitiEventListener, ExecutionListener,TaskListener {
+public class CustomActivitiListener implements Serializable, ActivitiEventListener, ExecutionListener, TaskListener {
     @Override
     public void notify(DelegateExecution delegateExecution) throws Exception {
         if (delegateExecution != null) {
-            if (delegateExecution.getEventName().equals("start"))
-            {
+            if (delegateExecution.getEventName().equals("start")) {
+
                 System.err.println("start:======开始========");
             }
-            if (delegateExecution.getEventName().equals("take"))
-            {
+            if (delegateExecution.getEventName().equals("take")) {
                 System.err.println("take:======连线========");
             }
-            if (delegateExecution.getEventName().equals("end"))
-            {
+            if (delegateExecution.getEventName().equals("end")) {
                 System.err.println("end:======结束========");
             }
             System.err.println("流程监听器:");
@@ -52,23 +54,33 @@ public class CustomActivitiListener implements Serializable,ActivitiEventListene
     @Override
     public void notify(DelegateTask delegateTask) {
         String eventName = delegateTask.getEventName();
+        DelegateExecution delegateExecution=delegateTask.getExecution();
         if ("create".endsWith(eventName)) {
+            if (delegateExecution.getCurrentActivityId().equals("task_business_approval"))
+                delegateTask.setAssignee("business_zhangsan");
+            if (delegateExecution.getCurrentActivityId().equals("task_business_leader_approval"))
+                delegateTask.setAssignee("business_leader_lisi");
             System.out.println("create=========");
-        }else if ("assignment".endsWith(eventName)) {
+        } else if ("assignment".endsWith(eventName)) {
             System.out.println("assignment========");
-        }else if ("complete".endsWith(eventName)) {
+        } else if ("complete".endsWith(eventName)) {
+            System.err.println("设置下一节点办理人");
+            delegateTask.setAssignee("liukaifeng");
             System.out.println("complete===========");
-        }else if ("delete".endsWith(eventName)) {
+        } else if ("delete".endsWith(eventName)) {
             System.out.println("delete=============");
         }
-        System.out.println("任务监听器:" +delegateTask.toString());
-        System.out.println("当前事件名称:" +delegateTask.getEventName());
+
+        System.out.println("任务监听器:" + delegateTask.toString());
+        System.out.println("getCurrentActivityId:" + delegateTask.getExecution().getCurrentActivityId());
+        System.out.println("当前事件名称:" + delegateTask.getEventName());
     }
 
     @Override
     public void onEvent(ActivitiEvent activitiEvent) {
         System.err.println("=========================ActivitiEvent==========================");
         System.err.println("Event received getType: " + activitiEvent.getType());
+
         System.err.println("Event received getEngineServices: " + activitiEvent.getEngineServices());
         System.err.println("Event received getExecutionId: " + activitiEvent.getExecutionId());
         System.err.println("Event received getProcessDefinitionId: " + activitiEvent.getProcessDefinitionId());
@@ -76,7 +88,7 @@ public class CustomActivitiListener implements Serializable,ActivitiEventListene
 
         ActivitiEntityEvent entityEvent = (ActivitiEntityEvent) activitiEvent;
         TaskEntity taskEntity = (TaskEntity) entityEvent.getEntity();
-        System.err.println("TaskEntity:"+ JSONObject.toJSONString(taskEntity));
+        System.err.println("TaskEntity:" + JSONObject.toJSONString(taskEntity));
         System.err.println("=========================ActivitiEvent==========================");
     }
 

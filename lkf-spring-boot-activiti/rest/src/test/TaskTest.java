@@ -46,61 +46,28 @@ public class TaskTest {
     private FormService formService;/*一个可选服务，任务表单管理*/
     @Autowired
     private ManagementService managementService;
+
     /**
      * 部署流程定义（从inputStream）
      */
     @Test
-    public void deploymentProcessDefinition_inputStream() throws FileNotFoundException {
+    public void deployAndStartProcess() throws FileNotFoundException {
         InputStream inputStreamBpmn = this.getClass().getClassLoader().getResourceAsStream("processes/slyun_workflow_default.bpmn");
 
         Deployment deployment = repositoryService.createDeployment()
                 .addInputStream("slyun_workflow_default.bpmn", inputStreamBpmn)
-                .name("商龙云默认工作流").deploy();
+                .name("动态指定任务办理人").deploy();
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().deploymentId(deployment.getId()).singleResult();
 
-        System.out.println("部署：" + JSONObject.toJSONString(deployment));
+        identityService.setAuthenticatedUserId("kaifeng");//设置发起人
+        identityService.setUserInfo("100001", "username", "liukaifeng");
+        Map<String,Object> map=Maps.newHashMap();
+        map.put("process_definition_id",processDefinition.getId());
+        map.put("process_definition_name",processDefinition.getName());
 
-    }
-
-    @Test
-    public void getDeploymentProcess() {
-        List<ProcessDefinition> processDefinitionList = repositoryService.createProcessDefinitionQuery().orderByProcessDefinitionId().desc().list();
-
-        for (ProcessDefinition processDefinition:processDefinitionList){
-            System.err.println(processDefinition.getDeploymentId()+"\n"+
-            processDefinition.getKey()+"\n"+processDefinition.getName()+"\n"+processDefinition.getId());
-            System.err.println("========================================");
-        }
-    }
-
-    @Test
-    public void getRuntimeProcess() {
-      List<Execution> executionList=  runtimeService.createExecutionQuery().orderByProcessDefinitionId().desc().list();
-      if (executionList!=null&&executionList.size()>0)
-      {
-          for (Execution execution: executionList) {
-              System.err.println("getProcessInstanceId=="+execution.getProcessInstanceId());
-              System.err.println("getDescription=="+execution.getDescription());
-              System.err.println("getId=="+execution.getId());
-              System.err.println("getName=="+execution.getName());
-
-          }
-      }
-      else{
-          System.err.println("没有正在执行的流程");
-      }
-
-    }
-    /**
-     * 启动流程实例
-     */
-    @Test
-    public void startProcessInstance() {
-        String processDefinitionKey = "slyun_workflow_default:4:385008";
-        identityService.setAuthenticatedUserId("100001");
-        identityService.setUserInfo("100001","username","liukaifeng");
-        ProcessInstance pi = runtimeService.startProcessInstanceById(processDefinitionKey);
-        System.err.println("=================ProcessInstance=======================");
-        System.err.println("getBusinessKey:" +  pi.getBusinessKey());
+        ProcessInstance pi = runtimeService.startProcessInstanceById(processDefinition.getId(), "2017060322230025",map);
+        System.err.println("=================[流程启动]ProcessInstance=======================");
+        System.err.println("getBusinessKey:" + pi.getBusinessKey());
         System.err.println("getDeploymentId:" + pi.getDeploymentId());
         System.err.println("getDescription:" + pi.getDescription());
         System.err.println("getLocalizedDescription:" + pi.getLocalizedDescription());
@@ -114,86 +81,80 @@ public class TaskTest {
         System.err.println("getProcessDefinitionName:" + pi.getProcessDefinitionName());
         System.err.println("getProcessDefinitionVersion:" + pi.getProcessDefinitionVersion());
         System.err.println("getProcessDefinitionName:" + pi.getActivityId());
-        System.err.println("===================ProcessInstance=====================");
+        System.err.println("===================[流程启动]ProcessInstance=====================");
 
-    }
-    @Test
-    public void getProcessByUser(){
     }
 
     @Test
-    public void findTaskList(){
-        List<Task> taskList=taskService.createTaskQuery().processDefinitionId("slyun_workflow_default:2:367508").orderByTaskCreateTime().desc().list();
-        if (taskList != null&&taskList.size()>0) {
-            for (Task task:taskList)
-            {
+    public void getDeploymentProcess() {
+       repositoryService.suspendProcessDefinitionById("");
+    }
+
+    @Test
+    public void getRuntimeProcess() {
+        List<Execution> executionList = runtimeService.createExecutionQuery().orderByProcessDefinitionId().desc().list();
+        if (executionList != null && executionList.size() > 0) {
+            for (Execution execution : executionList) {
+                System.err.println("getProcessInstanceId==" + execution.getProcessInstanceId());
+
+                System.err.println("getDescription==" + execution.getDescription());
+                System.err.println("getId==" + execution.getId());
+                System.err.println("getName==" + execution.getName());
+
+            }
+        } else {
+            System.err.println("没有正在执行的流程");
+        }
+
+    }
+
+
+    @Test
+    public void getProcessByUser() {
+        Task task = taskService.createTaskQuery().taskAssignee("business_leader_lisi").singleResult();
+        System.err.println(task.getId()+"_"+task.getAssignee());
+    }
+
+    @Test
+    public void findTaskList() {
+        List<Task> taskList = taskService.createTaskQuery().processDefinitionId("slyun_workflow_default:8:410004").orderByTaskCreateTime().desc().list();
+        if (taskList != null && taskList.size() > 0) {
+            for (Task task : taskList) {
                 System.err.println("=================Task=======================");
-                System.err.println("getId:" +  task.getId());
+                System.err.println("getId:" + task.getId());
                 System.err.println("getName:" + task.getName());
                 System.err.println("getOwner:" + task.getOwner());
-                System.err.println("getAssignee:" +task.getAssignee());
+                System.err.println("getAssignee:" + task.getAssignee());
                 System.err.println("===================Task=====================");
             }
-        }
-        else {
+        } else {
             System.err.println("没有正在执行的任务");
         }
     }
 
     @Test
-    public void completeTask(){
-        Map<String,Object> map= Maps.newHashMap();
-        map.put("business_leader_flag",0);
-        String taskId="387505";
-        taskService.setAssignee(taskId,"1000900");
-        taskService.addComment(taskId,null,"当前是商务审批，下一步流转到财务审批");
-        taskService.complete(taskId,map);
+    public void completeTask() {
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("dynamic","true");
+        map.put("remark","动态指定办理人测试成功");
+//        map.put("business_leader_flag", 1);
+//        map.put("financial_leader_flag", 0);
+        String taskId = "412505";
+//        taskService.setAssignee(taskId, "财务—悟空");
+//        taskService.addComment(taskId, null, "当前是财务审批");
+        taskService.setVariable(taskId,"task_end",map);
+        taskService.complete(taskId, map);
         System.err.println("任务完成");
     }
+
     @Test
-    public void taskRollback(){
+    public void taskRollback() {
         taskRollback("82504");
     }
 
-    /**
-     * 查询当前人的个人任务
-     */
-    @Test
-    public void findMyPersonalTask() {
-
-//        String assignee = "张翠山";
-//        List<Task> list = processEngine.getTaskService()//与正在执行的任务管理相关的Service
-//                .createTaskQuery()//创建任务查询对象
-//                /**查询条件（where部分）*/
-//                .taskAssignee(assignee)//指定个人任务查询，指定办理人
-////                      .taskCandidateUser(candidateUser)//组任务的办理人查询
-////                      .processDefinitionId(processDefinitionId)//使用流程定义ID查询
-////                      .processInstanceId(processInstanceId)//使用流程实例ID查询
-////                      .executionId(executionId)//使用执行对象ID查询
-//                /**排序*/
-//                .orderByTaskCreateTime().asc()//使用创建时间的升序排列
-//                /**返回结果集*/
-////                      .singleResult()//返回惟一结果集
-////                      .count()//返回结果集的数量
-////                      .listPage(firstResult, maxResults);//分页查询
-//                .list();//返回列表
 
 
-    }
-
-
-//    //可以分配个人任务从一个人到另一个人（认领任务）
-//    @Test
-//    public void setAssigneeTask(){
-//        //任务ID
-//        String taskId = "5804";
-//        //指定的办理人
-//        String userId = "张翠山";
-//        processEngine.getTaskService()//
-//                .setAssignee(taskId, userId);
-//    }
-
-    public void taskRollback(String taskId){
+    public void taskRollback(String taskId) {
         //根据要跳转的任务ID获取其任务
         HistoricTaskInstance hisTask = historyService
                 .createHistoricTaskInstanceQuery().taskId(taskId)
