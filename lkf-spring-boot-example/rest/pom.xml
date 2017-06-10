@@ -23,7 +23,11 @@
             <artifactId>${parent.artifactId}-biz</artifactId>
             <version>${parent.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.lkf</groupId>
+            <artifactId>lkf-spring-boot</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -32,7 +36,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.lkf.example.rest.App</mainClass>
+                    <mainClass>com.lkf.Application</mainClass>
                     <outputDirectory>
                         ${project.build.directory}/${project.parent.name}
                     </outputDirectory>
