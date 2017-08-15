@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "cluster.datasource.url",
+      "type": "java.lang.String",
+      "description": "Description for cluster.datasource.url."
+  }
+] }

@@ -9,17 +9,12 @@
         <relativePath>../lkf-spring-boot-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>lkf-spring-boot-starter</artifactId>
+
+    <artifactId>lkf-spring-boot-consumer</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>lkf-spring-boot-starter-pagehelper</module>
-        <module>lkf-spring-boot-starter-druid</module>
-        <module>lkf-spring-boot-starter-mongodb</module>
-        <module>lkf-spring-boot-starter-redis</module>
-        <module>lkf-spring-boot-starter-email</module>
-        <module>lkf-spring-boot-starter-mybatis</module>
-        <module>lkf-spring-boot-starter-mq</module>
-        <module>lkf-mybatis-starter</module>
+        <module>lkf-spring-boot-consumer-notify</module>
     </modules>
+
 
 </project>
