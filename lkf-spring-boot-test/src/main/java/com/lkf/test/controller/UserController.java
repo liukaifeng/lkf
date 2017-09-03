@@ -10,10 +10,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -22,14 +22,17 @@ public class UserController {
     private UserService userService;
 
 
-    @ApiOperation(value = "添加用户信息", notes = "添加用户信息")
+
+
+
+    @RequestMapping(path = "/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiImplicitParams({@ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")})
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addUser(UserPO user) throws Exception {
-        if (user != null) {
-            userService.addUser(user);
+    @ApiOperation(value = "添加用户信息", notes = "添加用户信息",httpMethod = "POST")
+    public ResponseEntity<String> addUser(RequestEntity<UserPO> userPORequestEntity) throws Exception {
+        if (userPORequestEntity.getBody() != null) {
+            userService.addUser(userPORequestEntity.getBody());
         }
-        return "success";
+        return ResponseEntity.ok("ok");
     }
 
     @ApiOperation(value = "查询用户", notes = "根据用户名查询用户信息")

@@ -1,12 +1,13 @@
 package com.lkf.test.config;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -16,6 +17,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DataSourceConfiguration {
+    private Logger logger= LogManager.getLogger(this.getClass());
     @Value("${druid.type}")
     private Class<? extends DataSource> dataSourceType;
 
@@ -23,12 +25,14 @@ public class DataSourceConfiguration {
     @Primary
     @ConfigurationProperties(prefix = "druid.master")
     public DataSource masterDataSource() {
+        logger.info("masterDataSource");
         return DataSourceBuilder.create().type(dataSourceType).build();
     }
 
     @Bean(name = "slaveDataSource")
     @ConfigurationProperties(prefix = "druid.slave")
     public DataSource slaveDataSource() {
+        logger.info("slaveDataSource");
         return DataSourceBuilder.create().type(dataSourceType).build();
     }
 

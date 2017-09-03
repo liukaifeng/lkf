@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @PublishSwagger
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.lkf.test","com.lkf.**"})
-@MapperScan("com.lkf.test.dao")
+@MapperScan(basePackages = "com.lkf.test.dao")
 public class Application {
     public static void main(String[] args) {
         // 程序启动入口

@@ -24,14 +24,18 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+	private final UserMapper userMapper;
+
 	@Autowired
-	private UserMapper userMapper;
+	public UserServiceImpl(UserMapper userMapper) {
+		this.userMapper = userMapper;
+	}
 
 
 	@Override
 	public void addUser(UserPO user) throws Exception {
 		userMapper.addUser(user);
-		int a=1/0;
+//		int a=1/0;
 	}
 
 	@Override
