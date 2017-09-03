@@ -14,3 +14,4 @@ lkf-spring-boot-starter-redis对redis再次封装，重写spring的默认缓存�
 ~~~
 ## 七、mongdb的集成与封装【待办】
 ## 八、spring-boot：邮件【完成】
+## 九、spring-boot: 将多个微服务API集中管理【完成】
