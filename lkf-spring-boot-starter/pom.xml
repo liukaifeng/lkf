@@ -20,6 +20,7 @@
         <module>lkf-spring-boot-starter-mybatis</module>
         <module>lkf-spring-boot-starter-mq</module>
         <module>lkf-mybatis-starter</module>
+        <module>lkf-swagger-publish-starter</module>
     </modules>
 
 </project>
