@@ -45,11 +45,11 @@
             <artifactId>pagehelper</artifactId>
             <version>5.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.lkf</groupId>
-            <artifactId>lkf-swagger-publish-starter</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.lkf</groupId>-->
+            <!--<artifactId>lkf-swagger-publish-starter</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
     </dependencies>
 
 

@@ -21,6 +21,7 @@
         <module>lkf-spring-boot-starter-mq</module>
         <module>lkf-mybatis-starter</module>
         <module>lkf-swagger-publish-starter</module>
+        <module>lkf-spring-boot-starter-quartz</module>
     </modules>
 
 </project>

@@ -1,6 +1,6 @@
 package com.lkf.test.config;
 
-import com.lkf.swagger.config.PublishSwagger;
+
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,8 +10,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * Created by Administrator on 2017/8/19 0019.
  */
-@EnableSwagger2
-@PublishSwagger
+//@EnableSwagger2
+//@PublishSwagger
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.lkf.test","com.lkf.**"})
 @MapperScan(basePackages = "com.lkf.test.dao")
