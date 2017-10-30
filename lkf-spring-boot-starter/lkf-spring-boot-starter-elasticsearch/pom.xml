@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>lkf-spring-boot-starter</artifactId>
+        <groupId>com.lkf</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lkf-spring-boot-starter-elasticsearch</artifactId>
+
+    <!-- 版本控制  -->
+    <properties>
+        <log4j-api.version>2.9.1</log4j-api.version>
+        <log4j-core.version>2.9.1</log4j-core.version>
+        <elasticsearch.version>5.6.1</elasticsearch.version>
+        <transport.version>5.6.1</transport.version>
+    </properties>
+    <!-- elasticsearch 5.x 依赖 -->
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${elasticsearch.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>transport</artifactId>
+            <version>${transport.version}</version>
+        </dependency>
+    </dependencies>
+</project>
