@@ -27,8 +27,9 @@ public class JobFileAppender {
     public static String buildLogFileName(Date triggerDate, int logId) {
         File filePath = new File(logPath);
         /*日志路径不存在，创建路径*/
-        if (!filePath.exists())
+        if (!filePath.exists()) {
             filePath.mkdirs();
+        }
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String currentFormat = simpleDateFormat.format(new Date());
